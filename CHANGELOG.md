@@ -1,5 +1,66 @@
 # Master (Unreleased)
 
+# 0.95.12 - 28 October, 2021
+
+### New features:
+
+- New dialect: CockroachDB #4742
+- New dialect: pg-native #4327
+- CockroachDB: add support for upsert #4767
+- PostgreSQL: Support SELECT .. FOR NO KEY UPDATE / KEY SHARE row level locking clauses #4755
+- PostgreSQL: Add support for 'CASCADE' in PostgreSQL 'DROP SCHEMA' queries #4713
+- MySQL: Add storage engine index Type support to index() and unique() schema #4756
+- MSSQL: Support table.primary, table.unique variant with options object #4710
+- SQLite: Add setNullable support to SQLite #4684
+- Add geometry column building #4776
+- Add support for creating table copies #1373
+- Implement support for views and materialized views #1626
+- Implement partial index support #4768
+- Support for 'is null' in 'order by' #3667
+
+### Bug fixes:
+
+- Fix support for Oracle connections passed via knex.connection() #4757
+- Avoid inserting multiple locks if a migration lock already exists #4694
+
+### Typings:
+
+- Some TableBuilder methods return wrong types #4764
+- Update JoinRaw bindings type to accept arrays #4752
+- fix onDelete/onUpdate for ColumnBuilder #4656
+
+# 0.95.11 - 03 September, 2021
+
+### New features:
+
+- Add support for nullability modification via schema builder (table.setNullable() and table.dropNullable()) #4657
+- MySQL: Add support for mysql/mariadb-client JSON parameters in connectionURIs #4629
+- MSSQL: Support comments as MS_Description properties #4632
+
+### Bug fixes:
+
+- Fix Analytic orderBy and partitionBy to follow the SQL documentation #4602
+- CLI: fix migrate:up for migrations disabling transactions #4550
+- SQLite: Fix adding a column with a foreign key constraint in SQLite #4649
+- MSSQL: columnInfo() support case-sensitive database collations #4633
+- MSSQL: Generate valid SQL for withRecursive() #4514
+- Oracle: withRecursive: omit invalid RECURSIVE keyword, include column list #4514
+
+### Improvements:
+
+- Add .mjs migration and seed stubs #4631
+- SQLite: Clean up DDL handling and move all operations to the parser-based approach #4648
+
+# 0.95.10 - 20 August, 2021
+
+### Improvements:
+
+- Use sys info function instead of connection db name #4623
+
+### Typings:
+
+- Deferrable and withkeyName should not be in ColumnBuilder #4600
+
 # 0.95.9 - 31 July, 2021
 
 ### New features:

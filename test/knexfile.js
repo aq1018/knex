@@ -9,7 +9,8 @@ const _ = require('lodash');
 
 // excluding redshift, oracle, and mssql dialects from default integrations test
 const testIntegrationDialects = (
-  process.env.DB || 'sqlite3 postgres mysql mysql2 mssql oracledb'
+  process.env.DB ||
+  'sqlite3 postgres pgnative mysql mysql2 mssql oracledb cockroachdb'
 ).match(/\w+/g);
 
 console.log(`ENV DB: ${process.env.DB}`);
@@ -98,6 +99,36 @@ const testConfigs = {
     connection: testConfig.postgres || {
       adapter: 'postgresql',
       port: 25432,
+      host: 'localhost',
+      database: 'knex_test',
+      user: 'testuser',
+      password: 'knextest',
+    },
+    pool,
+    migrations,
+    seeds,
+  },
+
+  cockroachdb: {
+    client: 'cockroachdb',
+    connection: testConfig.cockroachdb || {
+      adapter: 'cockroachdb',
+      port: 26257,
+      host: 'localhost',
+      database: 'test',
+      user: 'root',
+      password: undefined,
+    },
+    pool,
+    migrations,
+    seeds,
+  },
+
+  pgnative: {
+    client: 'pgnative',
+    connection: testConfig.pgnative || {
+      adapter: 'postgresql',
+      port: 25433,
       host: 'localhost',
       database: 'knex_test',
       user: 'testuser',

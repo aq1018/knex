@@ -5,14 +5,24 @@ const testConfig =
 
 const Db = {
   PostgresSQL: 'postgres',
+  PgNative: 'pgnative',
   MySQL: 'mysql',
   MySQL2: 'mysql2',
   MSSQL: 'mssql',
   SQLite: 'sqlite3',
   Oracle: 'oracledb',
+  CockroachDB: 'cockroachdb',
 };
 
-const defaultDbs = [Db.PostgresSQL, Db.MySQL, Db.MySQL2, Db.SQLite, Db.MSSQL];
+const defaultDbs = [
+  Db.PostgresSQL,
+  Db.PgNative,
+  Db.MySQL,
+  Db.MySQL2,
+  Db.SQLite,
+  Db.MSSQL,
+  Db.CockroachDB,
+];
 
 function getAllDbs() {
   return process.env.DB ? process.env.DB.split(' ') : defaultDbs;
@@ -87,6 +97,36 @@ const testConfigs = {
     connection: testConfig.postgres || {
       adapter: 'postgresql',
       port: 25432,
+      host: 'localhost',
+      database: 'knex_test',
+      user: 'testuser',
+      password: 'knextest',
+    },
+    pool,
+    migrations,
+    seeds,
+  },
+
+  cockroachdb: {
+    client: 'cockroachdb',
+    connection: testConfig.cockroachdb || {
+      adapter: 'cockroachdb',
+      port: 26257,
+      host: 'localhost',
+      database: 'test',
+      user: 'root',
+      password: '',
+    },
+    pool,
+    migrations,
+    seeds,
+  },
+
+  pgnative: {
+    client: Db.PgNative,
+    connection: testConfig.pgnative || {
+      adapter: 'postgresql',
+      port: 25433,
       host: 'localhost',
       database: 'knex_test',
       user: 'testuser',
